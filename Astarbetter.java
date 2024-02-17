@@ -56,19 +56,13 @@ public class Astarbetter {
 
    // method to check if our cell (row, col) is valid
    boolean isValid(int[][] grid, int rows, int cols, Pair point){
-       if (rows > 0 && cols > 0)
-           return (point.first >= 0) && (point.first < rows)
-                   && (point.second >= 0)
-                   && (point.second < cols);
-
-       return false;
+        return (point.first >= 0) && (point.first < rows) && (point.second >= 0) && (point.second < cols);
    }
 
    //is the cell blocked?
 
    boolean isUnBlocked(int[][] grid, int rows, int cols, Pair point){
-       return isValid(grid, rows, cols, point)
-               && grid[point.first][point.second] == 1;
+       return isValid(grid, rows, cols, point) && (grid[point.first][point.second] == 1);
    }
 
    //Method to check if destination cell has been already reached
@@ -123,8 +117,7 @@ public class Astarbetter {
        }
 
 
-       if (!isUnBlocked(grid, rows, cols, src)
-               || !isUnBlocked(grid, rows, cols, dest)) {
+       if (!isUnBlocked(grid, rows, cols, src)|| !isUnBlocked(grid, rows, cols, dest)) {
            System.out.println("Source or destination is blocked...");
            return;
        }
@@ -230,17 +223,17 @@ public class Astarbetter {
             for (int j = 0; j < Size; j++) {
                 if (PixelGrid.colors[i][j] == Color.GREEN) {
                     src.first = i;
-                    src.first = j;
-                    grid[i][j] = 1;
+                    src.second = j;
+                    grid[j][i] = 1;
                 }
-                else if (PixelGrid.colors[i][j] == Color.ORANGE) {
+                if (PixelGrid.colors[i][j] == Color.ORANGE) {
                     dest.first = i;
                     dest.second = j;
                     grid[i][j] = 1;
                 }
-                else if (PixelGrid.colors[i][j] == Color.GRAY)
+                if (PixelGrid.colors[i][j] == Color.GRAY)
                     grid[i][j] = 0;
-                else if (PixelGrid.colors[i][j] == Color.WHITE)
+                if (PixelGrid.colors[i][j] == Color.WHITE)
                     grid[i][j] = 1;
             }
         }
