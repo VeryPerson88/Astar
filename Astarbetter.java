@@ -71,9 +71,11 @@ public class Astarbetter {
    }
 
    // Method to calculate heuristic function
-   double calculateHValue(Pair src, Pair dest){
-       return Math.sqrt(Math.pow((src.first - dest.first), 2.0) + Math.pow((src.second - dest.second), 2.0));
-   }
+    double calculateHValue(Pair src, Pair dest){
+        double dx = Math.abs(src.first-dest.first);
+        double dy = Math.abs(src.second-dest.second);
+        return (1 * (dx + dy)) + ((Math.sqrt(2) - 2 * 1) * Math.min(dx, dy));
+    }
 
    // Method for tracking the path from source to destination
 
@@ -221,20 +223,17 @@ public class Astarbetter {
         // color to number translation
         for (int i = 0; i < Size; i++) {
             for (int j = 0; j < Size; j++) {
+                grid[i][j] = 1;
                 if (PixelGrid.colors[i][j] == Color.GREEN) {
                     src.first = i;
                     src.second = j;
-                    grid[j][i] = 1;
                 }
                 if (PixelGrid.colors[i][j] == Color.ORANGE) {
                     dest.first = i;
                     dest.second = j;
-                    grid[i][j] = 1;
                 }
                 if (PixelGrid.colors[i][j] == Color.GRAY)
                     grid[i][j] = 0;
-                if (PixelGrid.colors[i][j] == Color.WHITE)
-                    grid[i][j] = 1;
             }
         }
         System.out.println(src.first);
